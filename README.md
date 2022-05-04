@@ -9,4 +9,4 @@ Of course, there's chat. I didn't screenshot it.
 ## Why
 I've had enough of this bad game environment.
 ## How to use it
-[Click here to download the DLL and inject it](https://github.com/HolyWurl/Block-GTASpamMessage/releases/tag/V1)
+[Click here to download the DLL and use Xenos.exe to inject it](https://github.com/HolyWurl/Block-GTASpamMessage/releases/tag/V1)
