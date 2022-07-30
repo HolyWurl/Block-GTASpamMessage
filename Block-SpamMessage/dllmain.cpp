@@ -4,8 +4,8 @@
 
 bool g_running = true;
 bool IsSpam(std::string message) {
-	const char* words[] = {"群", "刷", "VX", "微", "解锁", "辅助", "淘宝", "卡网", "科技", "成人", "少妇", "萝莉", "淫", "少女", "片", "官网", "www", "WWW", "xyz", "top", "cn", "QQ", "qq", "激情"};
-	for (int i = 0; i < 24; i++)
+	const char* words[] = {"外挂", "群", "刷", "VX", "微", "解锁", "辅助", "淘宝", "卡网", "科技", "成人", "少妇", "萝莉", "淫", "少女", "片", "官网", "www", "WWW", "xyz", "top", "cn", "QQ", "qq", "激情"};
+	for (int i = 0; i < 25; i++)
 	{
 		if (strstr(message.c_str(), words[i]) != NULL) 
 			return true;
@@ -53,7 +53,7 @@ DWORD Mainthread(LPVOID lp)
     {
         m_event_network_text_message_received = ptr.as<event_network_text_message_received_t*>();
     });
-    main_batch.add("get_chat_data", "4D 85 C9 0F 84 ? ? ? ? 48 8B C4 48 89 58 08 48 89 70 10 48 89 78 18 4C 89 48 20 55 41 54 41 55 41 56 41 57 48 8D A8", [=](ptr_manage ptr)
+    main_batch.add("get_chat_data", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 30 49 8B F8 44 8B 81 ? ? ? ?", [=](ptr_manage ptr)
     {
         m_get_chat_data = ptr.as<get_chat_data_t>();
     });
