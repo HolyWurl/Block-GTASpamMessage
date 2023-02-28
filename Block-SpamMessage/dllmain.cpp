@@ -53,7 +53,7 @@ DWORD Mainthread(LPVOID lp)
     {
         m_event_network_text_message_received = ptr.as<event_network_text_message_received_t*>();
     });
-    main_batch.add("get_chat_data", "48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 30 49 8B F8 44 8B 81 ? ? ? ?", [=](ptr_manage ptr)
+    main_batch.add("get_chat_data", "49 8B C1 45 33 C9 49 8B D0", [=](ptr_manage ptr)
     {
         m_get_chat_data = ptr.as<get_chat_data_t>();
     });
