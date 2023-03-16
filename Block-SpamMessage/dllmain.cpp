@@ -4,8 +4,8 @@
 
 bool g_running = true;
 bool IsSpam(std::string message) {
-	const char* words[] = {"外挂", "群", "刷", "VX", "微", "解锁", "辅助", "淘宝", "卡网", "科技", "成人", "少妇", "萝莉", "淫", "少女", "片", "官网", "www", "WWW", "xyz", "top", "cn", "QQ", "qq", "激情"};
-	for (int i = 0; i < 25; i++)
+	const char* words[] = {"~", "font", "外挂", "群", "刷", "VX", "微", "解锁", "辅助", "淘宝", "卡网", "科技", "成人", "少妇", "萝莉", "淫", "少女", "片", "官网", "www", "WWW", "xyz", "top", "cn", "QQ", "qq", "激情"};
+	for (int i = 0; i < 27; i++)
 	{
 		if (strstr(message.c_str(), words[i]) != NULL) 
 			return true;
@@ -44,6 +44,13 @@ bool hk_event_network_text_message_received(CEventNetWorkTextMessageReceived* a1
     return og_event_network_text_message_received(a1, a2, a3);
 }
 
+void* og_presence_bounty = nullptr;
+PVOID m_presence_bounty{};
+bool hk_presence_bounty(__int64 a1, __int64 a2)
+{
+    return false;
+}
+
 DWORD Mainthread(LPVOID lp)
 {
     MH_Initialize();
@@ -57,9 +64,14 @@ DWORD Mainthread(LPVOID lp)
     {
         m_get_chat_data = ptr.as<get_chat_data_t>();
     });
+    main_batch.add("presence_bounty", "48 89 5C 24 ? 57 48 83 EC 20 48 8B DA 4C 8D 41 08 48 8B F9 48 8D 15 ? ? ? ? 41 B9 ? ? ? ? 48 8B CB E8 ? ? ? ? 84 C0 74 7D", [=](ptr_manage ptr)
+    {
+        m_presence_bounty = ptr.as<PVOID>();
+    });
     main_batch.run();
     MH_CreateHook(m_get_chat_data, hk_get_chat_data, (LPVOID*)&og_get_chat_data);
     MH_CreateHook(m_event_network_text_message_received, hk_event_network_text_message_received, (LPVOID*)&og_event_network_text_message_received);
+    MH_CreateHook(m_presence_bounty, hk_presence_bounty, (LPVOID*)&og_presence_bounty);
     MH_EnableHook(MH_ALL_HOOKS);
     while (g_running)
     {
